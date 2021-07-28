@@ -1,0 +1,14 @@
+{
+  "name": "docker-mysql-env",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "mysql:up:process": "docker-compose up --build",
+    "mysql:up": "docker-compose up --d",
+    "mysql:kill": "docker-compose down --rmi all -v --remove-orphans"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
