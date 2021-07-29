@@ -2,16 +2,18 @@ version: "2"
 services:
   mysql-db:
     image: cytopia/mariadb-5.5
-    container_name: mysql_container
+    container_name: mysql-db
     environment:
-      MYSQL_HOST: localhost
-      MYSQL_ROOT_PASSWORD: password
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_ROOT_HOST="%"
     ports:
       - 3306:3306
     command: mysqld --sql_mode="NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES"
     restart: always
-    healthcheck:
-      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+    volumes:
+      - ./mysql:/var/lib/mysql
+    expose:
+      - 3306
   phpmyadmin:
     depends_on:
       - mysql-db
